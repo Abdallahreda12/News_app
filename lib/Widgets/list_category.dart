@@ -4,13 +4,13 @@ import 'package:news_app/Widgets/category_card.dart';
 class ListCategory extends StatelessWidget {
   const ListCategory({super.key});
   final List<String> categories = const [
+    "general",
     "business",
     "entertemaint",
     "health",
     "science",
     "sports",
     "technology",
-    "general"
   ];
 
   @override
