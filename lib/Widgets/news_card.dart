@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-
+import 'package:news_app/models/news_model.dart';
 
 class NewsCard extends StatelessWidget {
-  const NewsCard({super.key});
-
+  const NewsCard({super.key, required this.news});
+  final NewsModel news;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -12,23 +12,23 @@ class NewsCard extends StatelessWidget {
         ClipRRect(
           borderRadius: BorderRadius.circular(8),
           child: Image.network(
-            'https://th.bing.com/th/id/OIP.wPAO9Ciq-gtRWEG5NYaFswHaD4?pid=ImgDet&rs=1',
+            news.image,
           ),
         ),
-        const Padding(
-          padding: EdgeInsets.only(left: 8.0, top: 8),
+        Padding(
+          padding: const EdgeInsets.only(left: 8.0, top: 8),
           child: Text(
-            "title",
-            style: TextStyle(fontSize: 22, fontWeight: FontWeight.w400),
+            news.title,
+            style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w400),
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
           ),
         ),
-        const Padding(
-          padding: EdgeInsets.only(left: 8.0, top: 3),
+        Padding(
+          padding: const EdgeInsets.only(left: 8.0, top: 3),
           child: Text(
-            "Description",
-            style: TextStyle(
+            news.description,
+            style: const TextStyle(
                 fontSize: 18, fontWeight: FontWeight.w400, color: Colors.grey),
             maxLines: 2,
             overflow: TextOverflow.ellipsis,

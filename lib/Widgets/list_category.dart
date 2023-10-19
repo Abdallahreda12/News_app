@@ -17,14 +17,12 @@ class ListCategory extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 120,
-      child: Expanded(
-        child: ListView(
-            scrollDirection: Axis.horizontal,
-            children: categories
-                .map((e) =>
-                    CategoryCard(categoryName: e.toString(), image: "$e.jpg"))
-                .toList()),
-      ),
+      child: ListView(
+          scrollDirection: Axis.horizontal,
+          children: categories
+              .map((e) =>
+                  CategoryCard(categoryName: e.toString(), image: "$e.jpg"))
+              .toList()),
     );
   }
 }

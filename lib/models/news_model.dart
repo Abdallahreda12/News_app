@@ -17,11 +17,11 @@ class NewsModel {
   factory NewsModel.fromJson(jsonData) {
     return NewsModel(
       title: jsonData['title'],
-      description: jsonData['title'],
-      content: jsonData['price'],
-      url: jsonData['description'],
-      image: jsonData["category"],
-      publishedAt: jsonData['image'],
+      description: jsonData['description'],
+      content: jsonData['content'],
+      url: jsonData['url'],
+      image: jsonData["image"],
+      publishedAt: jsonData['publishedAt'],
     );
   }
 }

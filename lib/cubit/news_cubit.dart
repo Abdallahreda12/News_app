@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:http/http.dart' as http;
-
 import '../models/news_model.dart';
 
 part 'news_state.dart';
@@ -11,21 +10,23 @@ part 'news_state.dart';
 class NewsCubit extends Cubit<NewsState> {
   NewsCubit() : super(NewsInitial());
 
-  getNews(String categoryName) async {
-    String apiKey = "926a0bf189f622fb033e24281e8b6b77";
-    String baseUrl = " https://gnews.io/api/v4/top-headlines?";
+  getNews({String categoryName='general',String country='uk',String lang='en'}) async {
+  
     List<NewsModel> newsList = [];
+    String apiKey = "926a0bf189f622fb033e24281e8b6b77";
 
-    emit(NewsLoading());
     try {
-      //get data from http
-      final dio = Dio();
-      final response=dio.get(path)
-      Map<String, dynamic> data = jsonDecode(response.body);
+      Uri url = Uri.parse(
+          'https://gnews.io/api/v4/top-headlines?category=$categoryName&lang=$lang&country=$country&apikey=$apiKey');
+
+      http.Response response = await http.get(url);
+
+      Map<String, dynamic> apidata = await jsonDecode(response.body);
+      List<dynamic> data = apidata['articles'];
 
       for (var i = 0; i < data.length; i++) {
         newsList.add(
-          NewsModel.fromJson(data["articles"][i]),
+          NewsModel.fromJson(data[i]),
         );
       }
       emit(Newsseccuss(newsList));
