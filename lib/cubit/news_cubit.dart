@@ -19,8 +19,8 @@ class NewsCubit extends Cubit<NewsState> {
     emit(NewsLoading());
     try {
       //get data from http
-      Uri url = Uri.parse('$baseUrl/category=$categoryName/&apikey=$apiKey');
-      http.Response response = await http.get(url);
+      final dio = Dio();
+      final response=dio.get(path)
       Map<String, dynamic> data = jsonDecode(response.body);
 
       for (var i = 0; i < data.length; i++) {
