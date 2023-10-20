@@ -21,7 +21,7 @@ class NewsCard extends StatelessWidget {
             news.title,
             style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w400),
             maxLines: 2,
-            overflow: TextOverflow.ellipsis,
+            overflow: TextOverflow.visible,
           ),
         ),
         Padding(

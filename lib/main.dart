@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/bloc_observer.dart';
 import 'package:news_app/pages/home_page.dart';
+import 'package:news_app/pages/news_page.dart';
 
 import 'cubit/news_cubit.dart';
 
@@ -19,9 +20,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => NewsCubit(),
-      child: const MaterialApp(
+      child: MaterialApp(
+        routes: {
+          'newsPage': (context) => const NewsPage(),
+          'homePage': (context) => const HomePage()
+        },
         debugShowCheckedModeBanner: false,
-        home: HomePage(),
+        initialRoute: 'homePage',
       ),
     );
   }

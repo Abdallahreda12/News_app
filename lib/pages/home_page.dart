@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/Widgets/list_category.dart';
 import 'package:news_app/Widgets/list_news.dart';
-import 'package:news_app/cubit/news_cubit.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<NewsCubit>(context).getNews();
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
