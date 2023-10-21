@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_linkify/flutter_linkify.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class NewsPage extends StatelessWidget {
   const NewsPage({super.key});
@@ -6,7 +8,7 @@ class NewsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Map? news = ModalRoute.of(context)!.settings.arguments as Map?;
-
+    final DateTime date = DateTime.parse(news?['publishedAt']);
     return Scaffold(
       appBar: AppBar(
         leadingWidth: 50,
@@ -91,7 +93,7 @@ class NewsPage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 8.0, top: 8),
             child: Text(
-              "${news['content']}.\n\n Read more:",
+              "${news['content']}.",
               style: const TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.normal,
@@ -99,19 +101,32 @@ class NewsPage extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 8.0, top: 3),
+            padding: const EdgeInsets.only(left: 8.0, top: 10),
+            child: Linkify(
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(
+                  fontSize: 20,
+                ),
+                onOpen: (link) => launchUrl(Uri.parse(news['url'])),
+                text: "Read More :${news['url']}"),
+          ),
+          const Padding(
+            padding: EdgeInsets.only(top: 30),
             child: Text(
-              news['url'],
-              style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w400,
-                  color: Colors.grey),
+              "Publish At:",
+              style: TextStyle(
+                  fontSize: 24,
+                  color: Colors.grey,
+                  fontStyle: FontStyle.italic,
+                  fontWeight: FontWeight.normal,
+                  letterSpacing: 1),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 8.0, top: 3),
+            padding: const EdgeInsets.only(left: 8.0, top: 10),
             child: Text(
-              news['publishedAt'],
+              '${date.year} / ${date.month} / ${date.day}',
               style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w400,
