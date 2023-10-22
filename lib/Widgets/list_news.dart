@@ -25,22 +25,22 @@ class _ListNewsState extends State<ListNews> {
         if (state is Newsseccuss) {
           return SliverList(
             delegate: SliverChildBuilderDelegate(
-              childCount: state.newsList.length,
+              childCount: state.newsList?.length,
               (context, index) {
                 return Padding(
                     padding: const EdgeInsets.only(bottom: 30),
                     child: GestureDetector(
                         onTap: () {
                           Navigator.pushNamed(context, 'newsPage', arguments: {
-                            'title': state.newsList[index].title,
-                            'description': state.newsList[index].description,
-                            'content': state.newsList[index].content,
-                            'url': state.newsList[index].url,
-                            'image': state.newsList[index].image,
-                            'publishedAt': state.newsList[index].publishedAt,
+                            'title': state.newsList?[index].title,
+                            'description': state.newsList?[index].description,
+                            'content': state.newsList?[index].content,
+                            'url': state.newsList?[index].url,
+                            'image': state.newsList?[index].image,
+                            'publishedAt': state.newsList?[index].publishedAt,
                           });
                         },
-                        child: NewsCard(news: state.newsList[index])));
+                        child: NewsCard(news: state.newsList![index])));
               },
             ),
           );
