@@ -4,12 +4,15 @@ import 'package:news_app/Widgets/list_category.dart';
 import 'package:news_app/Widgets/list_news.dart';
 import 'package:news_app/cubit/news_cubit.dart';
 
+String? country;
+String? category;
+
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final List<String> country = [
+    final List<String> countries = [
       "Egypt",
       "United States",
       "United Kingdom",
@@ -40,15 +43,16 @@ class HomePage extends StatelessWidget {
                     "Country",
                     style: TextStyle(fontSize: 16),
                   )),
-              items: country.map((String value) {
+              items: countries.map((String value) {
                 return DropdownMenuItem<String>(
                   value: value,
                   child: Text(value),
                 );
               }).toList(),
               onChanged: (e) {
-                String country = getCountry(e);
-                BlocProvider.of<NewsCubit>(context).getNews(country: country);
+                country = getCountry(e);
+                print(country);
+                BlocProvider.of<NewsCubit>(context).getNews(country: country,categoryName: category);
               },
             ),
           )

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/Widgets/category_card.dart';
 import 'package:news_app/cubit/news_cubit.dart';
+import 'package:news_app/pages/home_page.dart';
 
 class ListCategory extends StatefulWidget {
   const ListCategory({
@@ -23,7 +24,6 @@ class _ListCategoryState extends State<ListCategory> {
     "sports",
     "technology",
   ];
-  String? category;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -34,8 +34,9 @@ class _ListCategoryState extends State<ListCategory> {
               .map(
                 (e) => GestureDetector(
                   onTap: () {
+                    category = e;
                     BlocProvider.of<NewsCubit>(context)
-                        .getNews(categoryName: e);
+                        .getNews(country: country, categoryName: e);
                   },
                   child:
                       CategoryCard(categoryName: e.toString(), image: "$e.jpg"),
