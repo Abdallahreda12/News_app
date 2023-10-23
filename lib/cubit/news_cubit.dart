@@ -12,15 +12,14 @@ class NewsCubit extends Cubit<NewsState> {
 
   getNews({
     String categoryName = 'general',
-    String? country,
+    String country = 'eg',
   }) async {
     List<NewsModel> newsList = [];
     String apiKey = "926a0bf189f622fb033e24281e8b6b77";
-    String? Country = country;
-    emit(NewsLoading());
+
     try {
       Uri url = Uri.parse(
-          'https://gnews.io/api/v4/top-headlines?category=$categoryName&country=$Country&apikey=$apiKey');
+          'https://gnews.io/api/v4/top-headlines?category=$categoryName&country=$country&apikey=$apiKey');
 
       http.Response response = await http.get(url);
 

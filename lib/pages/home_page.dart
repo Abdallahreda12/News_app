@@ -9,7 +9,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<String> lang = [
+    final List<String> country = [
       "Egypt",
       "United States",
       "United Kingdom",
@@ -27,23 +27,35 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         actions: [
-          DropdownButton<String>(
-            items: lang.map((String value) {
-              return DropdownMenuItem<String>(
-                value: value,
-                child: Text(value),
-              );
-            }).toList(),
-            onChanged: (e) {
-              String country = getLang(e);
-              BlocProvider.of<NewsCubit>(context).getNews(country: country);
-            },
+          SizedBox(
+            width: 110,
+            child: DropdownButton<String>(
+              iconSize: 50,
+              isExpanded: true,
+              style: const TextStyle(color: Colors.orangeAccent),
+              underline: Container(),
+              icon: const IconTheme(
+                  data: IconThemeData(),
+                  child: Text(
+                    "Country",
+                    style: TextStyle(fontSize: 16),
+                  )),
+              items: country.map((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+              onChanged: (e) {
+                String country = getCountry(e);
+                BlocProvider.of<NewsCubit>(context).getNews(country: country);
+              },
+            ),
           )
         ],
         elevation: 0,
         backgroundColor: Colors.transparent,
-        title:
-            const Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+        title: const Row(mainAxisAlignment: MainAxisAlignment.end, children: [
           Text(
             "News",
             style: TextStyle(color: Colors.black, fontSize: 25),
@@ -72,7 +84,7 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  String getLang(String? e) {
+  String getCountry(String? e) {
     String ret = '';
     Map<String, String> country = {
       "Egypt": "eg",

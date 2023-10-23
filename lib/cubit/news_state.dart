@@ -10,9 +10,12 @@ final class NewsInitial extends NewsState {}
 final class NewsLoading extends NewsState {}
 
 final class Newsseccuss extends NewsState {
+
+  
   final List<NewsModel>? newsList;
 
   Newsseccuss([this.newsList]);
+
 }
 
 final class NewsFaild extends NewsState {
