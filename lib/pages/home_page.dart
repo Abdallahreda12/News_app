@@ -4,9 +4,6 @@ import 'package:news_app/Widgets/list_category.dart';
 import 'package:news_app/Widgets/list_news.dart';
 import 'package:news_app/cubit/news_cubit.dart';
 
-String? country;
-String? category;
-
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
@@ -50,9 +47,8 @@ class HomePage extends StatelessWidget {
                 );
               }).toList(),
               onChanged: (e) {
-                country = getCountry(e);
-                print(country);
-                BlocProvider.of<NewsCubit>(context).getNews(country: country,categoryName: category);
+                BlocProvider.of<NewsCubit>(context).country = getCountry(e);
+                BlocProvider.of<NewsCubit>(context).getNews();
               },
             ),
           )

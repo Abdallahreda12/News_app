@@ -9,20 +9,16 @@ part 'news_state.dart';
 
 class NewsCubit extends Cubit<NewsState> {
   NewsCubit() : super(NewsInitial());
-  late String defuiltCategory;
-  late String defuiltCountry;
-  getNews({
-    String? categoryName,
-    String? country,
-  }) async {
-    defuiltCategory = categoryName ?? 'general';
-    defuiltCountry = country ?? "eg";
+
+  String? categoryName;
+  String? country;
+  getNews() async {
     List<NewsModel> newsList = [];
     String apiKey = "926a0bf189f622fb033e24281e8b6b77";
 
     try {
       Uri url = Uri.parse(
-          'https://gnews.io/api/v4/top-headlines?category=${defuiltCategory}&country=${defuiltCountry}&apikey=$apiKey');
+          'https://gnews.io/api/v4/top-headlines?category=$categoryName&country=$country&apikey=$apiKey');
 
       http.Response response = await http.get(url);
 
